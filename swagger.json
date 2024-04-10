@@ -1,0 +1,141 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "CHAT API",
+        "description": "CHAT API"
+    },
+    "host": "",
+    "basePath": "/",
+    "schemes": [],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/api/v1/chats/register": {
+            "post": {
+                "tags": [
+                    "USER"
+                ],
+                "summary": "Register",
+                "description": "Description- User register - username and password.",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "User Register",
+                        "schema": {
+                            "$ref": "#/components/Register"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User registered successfully"
+                    },
+                    "400": {
+                        "description": "Username already exists"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unprocessable entity"
+                    }
+                }
+            }
+        },
+        "/api/v1/chats/login": {
+            "post": {
+                "tags": [
+                    "USER"
+                ],
+                "summary": "Login",
+                "description": "Description- User Login - username and password.",
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "body",
+                        "description": "User Login",
+                        "schema": {
+                            "$ref": "#/components/Register"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User Login successfully"
+                    },
+                    "400": {
+                        "description": "Invalid password || Invalid username"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "422": {
+                        "description": "Unprocessable entity"
+                    }
+                }
+            }
+        },
+        "/api/v1/chats/userexists/{username}": {
+            "get": {
+                "tags": [
+                    "USER"
+                ],
+                "summary": "Check if user exists",
+                "description": "Check if a user with the given username exists.",
+                "parameters": [
+                    {
+                        "name": "username",
+                        "in": "path",
+                        "description": "Username to check",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User exists"
+                    },
+                    "404": {
+                        "description": "User does not exist"
+                    },
+                    "422": {
+                        "description": "Unprocessable entity"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+      
+        "Register": {
+            "required": [
+                "username",
+                "password"
+            ],
+            "properties": {
+                "username": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            },
+            "example": {
+                "username": "Anamika",
+                "password": "Techugo@123"
+            }
+        }
+    }
+}
